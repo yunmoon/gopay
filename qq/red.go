@@ -10,8 +10,8 @@ import (
 	"encoding/xml"
 	"fmt"
 
-	"github.com/go-pay/gopay"
-	"github.com/go-pay/gopay/pkg/util"
+	"github.com/yunmoon/gopay"
+	"github.com/yunmoon/gopay/pkg/util"
 )
 
 // SendCashRed 创建现金红包

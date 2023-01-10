@@ -8,8 +8,8 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/go-pay/gopay"
-	"github.com/go-pay/gopay/pkg/xlog"
+	"github.com/yunmoon/gopay"
+	"github.com/yunmoon/gopay/pkg/xlog"
 )
 
 func TestCreateBatchPayout(t *testing.T) {

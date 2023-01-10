@@ -9,8 +9,8 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/go-pay/gopay"
-	"github.com/go-pay/gopay/pkg/xlog"
+	"github.com/yunmoon/gopay"
+	"github.com/yunmoon/gopay/pkg/xlog"
 )
 
 type Resource struct {

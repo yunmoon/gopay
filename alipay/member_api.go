@@ -8,8 +8,8 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/go-pay/gopay"
-	"github.com/go-pay/gopay/pkg/util"
+	"github.com/yunmoon/gopay"
+	"github.com/yunmoon/gopay/pkg/util"
 )
 
 // alipay.user.info.share(支付宝会员授权信息查询接口)

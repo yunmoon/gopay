@@ -3,7 +3,7 @@ package apple
 import (
 	"testing"
 
-	"github.com/go-pay/gopay/pkg/xlog"
+	"github.com/yunmoon/gopay/pkg/xlog"
 )
 
 func TestGetAllSubscriptionStatuses(t *testing.T) {

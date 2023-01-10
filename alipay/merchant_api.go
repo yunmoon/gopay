@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/go-pay/gopay"
+	"github.com/yunmoon/gopay"
 )
 
 // alipay.trade.royalty.relation.bind(分账关系绑定)

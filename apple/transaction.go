@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/go-pay/gopay"
-	"github.com/go-pay/gopay/pkg/xhttp"
+	"github.com/yunmoon/gopay"
+	"github.com/yunmoon/gopay/pkg/xhttp"
 )
 
 // GetTransactionHistory

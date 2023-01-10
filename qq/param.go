@@ -14,8 +14,8 @@ import (
 	"io/ioutil"
 	"strings"
 
-	"github.com/go-pay/gopay"
-	"github.com/go-pay/gopay/pkg/util"
+	"github.com/yunmoon/gopay"
+	"github.com/yunmoon/gopay/pkg/util"
 	"golang.org/x/crypto/pkcs12"
 )
 

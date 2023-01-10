@@ -20,6 +20,7 @@ type Client struct {
 	AppCertSN          string
 	AliPayPublicCertSN string
 	AliPayRootCertSN   string
+	GateWay            string
 	ReturnUrl          string
 	NotifyUrl          string
 	Charset            string
@@ -53,8 +54,14 @@ func NewClient(appid, privateKey string, isProd bool) (client *Client, err error
 		Charset:     UTF8,
 		SignType:    RSA2,
 		IsProd:      isProd,
+		GateWay:     baseUrl,
 		privateKey:  priKey,
 		DebugSwitch: gopay.DebugOff,
+	}
+	if isProd {
+		client.GateWay = baseUrlUtf8
+	} else {
+		client.GateWay = sandboxBaseUrlUtf8
 	}
 	return client, nil
 }
@@ -163,9 +170,7 @@ func (a *Client) PostAliPayAPISelfV2(ctx context.Context, bm gopay.BodyMap, meth
 
 // 向支付宝发送自定义请求
 func (a *Client) doAliPaySelf(ctx context.Context, bm gopay.BodyMap, method string) (bs []byte, err error) {
-	var (
-		url, sign string
-	)
+	var sign string
 	bm.Set("method", method)
 	// check public parameter
 	a.checkPublicParam(bm)
@@ -185,12 +190,7 @@ func (a *Client) doAliPaySelf(ctx context.Context, bm gopay.BodyMap, method stri
 	if a.bodySize > 0 {
 		httpClient.SetBodySize(a.bodySize)
 	}
-	if a.IsProd {
-		url = baseUrlUtf8
-	} else {
-		url = sandboxBaseUrlUtf8
-	}
-	res, bs, err := httpClient.Type(xhttp.TypeForm).Post(url).SendString(bm.EncodeURLParams()).EndBytes(ctx)
+	res, bs, err := httpClient.Type(xhttp.TypeForm).Post(a.GateWay).SendString(bm.EncodeURLParams()).EndBytes(ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -206,8 +206,8 @@ func (a *Client) doAliPaySelf(ctx context.Context, bm gopay.BodyMap, method stri
 // 向支付宝发送请求
 func (a *Client) doAliPay(ctx context.Context, bm gopay.BodyMap, method string, authToken ...string) (bs []byte, err error) {
 	var (
-		bizContent, url string
-		bodyBs          []byte
+		bizContent string
+		bodyBs     []byte
 	)
 	if bm != nil {
 		_, has := notRemoveAppAuthToken[method]
@@ -243,11 +243,8 @@ func (a *Client) doAliPay(ctx context.Context, bm gopay.BodyMap, method string, 
 		if a.bodySize > 0 {
 			httpClient.SetBodySize(a.bodySize)
 		}
-		url = baseUrlUtf8
-		if !a.IsProd {
-			url = sandboxBaseUrlUtf8
-		}
-		res, bs, err := httpClient.Type(xhttp.TypeForm).Post(url).SendString(param).EndBytes(ctx)
+
+		res, bs, err := httpClient.Type(xhttp.TypeForm).Post(a.GateWay).SendString(param).EndBytes(ctx)
 		if err != nil {
 			return nil, err
 		}

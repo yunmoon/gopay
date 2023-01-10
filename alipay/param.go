@@ -152,3 +152,9 @@ func (a *Client) SetAppAuthToken(appAuthToken string) (client *Client) {
 	a.AppAuthToken = appAuthToken
 	return a
 }
+
+// 设置请求网关
+func (a *Client) SetGateWay(gateWay string) *Client {
+	a.GateWay = gateWay
+	return a
+}

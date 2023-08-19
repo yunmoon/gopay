@@ -43,7 +43,7 @@ type Client struct {
 func NewClient() (client *Client) {
 	client = &Client{
 		HttpClient: &http.Client{
-			Timeout: 60 * time.Second,
+			Timeout: 5 * time.Second,
 			Transport: &http.Transport{
 				TLSClientConfig:   &tls.Config{InsecureSkipVerify: true},
 				DisableKeepAlives: true,

@@ -254,7 +254,7 @@ func (w *Client) doProdPost(ctx context.Context, bm gopay.BodyMap, path string, 
 	if res.StatusCode != 200 {
 		return nil, fmt.Errorf("HTTP Request Error, StatusCode = %d", res.StatusCode)
 	}
-	if strings.Contains(string(bs), "HTML") || strings.Contains(string(bs), "html") {
+	if strings.Contains(string(bs), "</HTML>") || strings.Contains(string(bs), "</html>") {
 		return nil, errors.New(string(bs))
 	}
 	return bs, nil
